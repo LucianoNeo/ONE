@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciando com canvas</title>
+</head>
+
+<body>
+    <canvas width="600" height="400"> </canvas>
+    <br>
+    Escolha uma cor <input type="color">
+
+    <script>
+        let tela = document.querySelector("canvas");
+        let pincel = tela.getContext("2d");
+
+        pincel.fillStyle = "lightgrey";
+        pincel.fillRect(0, 0, 600, 400);
+        var cores = ['blue', 'red', 'green']
+        var paleta = document.querySelector('input');
+        var indiceCorAtual = 0; // começa com blue
+        var raio = 10
+        var desenha = false
+
+        tela.onmousedown = function () {
+
+            desenha = true;
+        }
+
+        // atribuindo diretamente a função anônima
+        tela.onmouseup = function () {
+
+            desenha = false;
+        }
+
+        function desenhaCirculo(evento) {
+            if (desenha) {
+                let x = evento.pageX - tela.offsetLeft
+                let y = evento.pageY - tela.offsetTop
+                pincel.fillStyle = paleta.value
+                pincel.beginPath()
+                if (evento.shiftKey && raio <= 40) {
+                    raio = raio + 20; // raio agora passa a valer 30!
+                }
+                if (evento.altKey && raio > 10) {
+                    raio = raio - 5; // raio agora passa a valer 30!
+                }
+                pincel.arc(x, y, raio, 0, 2 * 3.14)
+                pincel.fill()
+            }
+        }
+
+        tela.onmousemove = desenhaCirculo
+
+        function mudaCor() {
+            indiceCorAtual++;
+            console.log(indiceCorAtual)
+            if (indiceCorAtual >= cores.length) {
+                indiceCorAtual = 0;
+            }
+            return false; // para não exibir o menu padrão do canvas
+        }
+        tela.oncontextmenu = mudaCor;
+    </script>
+</body>
+
+</html>

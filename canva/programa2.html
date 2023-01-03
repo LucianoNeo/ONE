@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciando com canvas</title>
+  </head>
+  <body>
+    <canvas width="600" height="400"> </canvas>
+    <script>
+      let tela = document.querySelector("canvas");
+      let pincel = tela.getContext("2d");
+
+      function desenhaQuadrado(x, y, cor) {
+        pincel.fillStyle = cor;
+        pincel.fillRect(x, y, 50, 50);
+        pincel.fillStroke = "black";
+        pincel.strokeRect(x, y, 50, 50);
+      }
+
+      let x = 0;
+      let y = 0;
+      for (x = 0; x < 600; x += 50) {
+        desenhaQuadrado(x, 0, "green");
+        for (y = 0; y < 600; y += 50) {
+          desenhaQuadrado(x, y, "green");
+        }
+      }
+
+      function desenhaTexto(x, y, texto) {
+        var tela = document.querySelector("canvas");
+        var pincel = tela.getContext("2d");
+
+        pincel.font = "25px Georgia";
+        pincel.fillStyle = "white";
+        pincel.fillText(texto, x, y);
+      }
+
+      desenhaTexto(50, 50, "Preenchendo a tela com canvas!");
+    </script>
+  </body>
+</html>

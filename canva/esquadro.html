@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciando com canvas</title>
+  </head>
+  <body>
+    <canvas width="600" height="400"> </canvas>
+    <script>
+      let tela = document.querySelector("canvas");
+      let pincel = tela.getContext("2d");
+
+      function desenhaEsquadro(xa, ya, xc, yc, cor) {
+        // triangulo externo
+        pincel.beginPath();
+        pincel.moveTo(xa, ya);
+        pincel.lineTo(xa, yc);
+        pincel.lineTo(xc, yc);
+        pincel.fillStyle = cor;
+        pincel.fill();
+
+        // triangulo interno
+        pincel.beginPath();
+        pincel.moveTo(xa + 50, ya + 125);
+        pincel.lineTo(xa + 50, yc - 50);
+        pincel.lineTo(xc - 125, xc - 50);
+        pincel.fillStyle = "white";
+        pincel.fill();
+      }
+
+      desenhaEsquadro(50, 50, 400, 400, "black");
+    </script>
+  </body>
+</html>
